@@ -5,10 +5,14 @@ describe "connect_four" do
   let(:empyt_slot) { Board::SEPERATOR + Board::EMPTY }
   let(:empty_row) { (empyt_slot) * 7 + Board::SEPERATOR + "\n" }
   let(:empty_board){ "\n" + empty_row * 6 } 
-  let(:game){ Connect.new(Board.new) }
+  #let(:game){ Connect.new(Board.new) }
   describe "starts a new game" do
     it "prints a 6 row 7 column board" do
-      expect{ game.game_start }.to output(/^#{empty_board}.*/).to_stdout
+      output = double('output').as_null_object
+      game = Connect.new(Board.new, output)
+      expect(output).to receive(:puts).with(empty_board)
+      game.game_start
+      #expect{ game.game_start }.to output(/^#{empty_board}.*/).to_stdout
     end
   end
 

@@ -5,8 +5,9 @@ output_strings = {
 class Connect
   attr_reader :board
   PLAYER_ONE = "X"
-  def initialize(board)
+  def initialize(board, output = STDOUT)
     @board = board
+    @output = output
   end
 
   def game_start
@@ -14,7 +15,7 @@ class Connect
   end
 
   def show_board
-    puts @board.board_to_s
+    @output.puts @board.board_to_s
   end
 
 private
